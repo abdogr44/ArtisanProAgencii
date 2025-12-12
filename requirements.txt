@@ -1,0 +1,9 @@
+agency-swarm[fastapi]>=1.2.1
+fastapi
+uvicorn
+python-docx
+PyMuPDF
+python-pptx
+fpdf2
+Pillow
+requests

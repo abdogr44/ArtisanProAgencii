@@ -1,0 +1,162 @@
+{
+    "case_studies": [
+        {
+            "id": "luxury_tech_startup",
+            "brand": "Luxury Tech Startup",
+            "industry": "Technology / Consumer Electronics",
+            "challenge": "Position as premium in crowded tech market dominated by utilitarian brands",
+            "strategy": {
+                "core_truth": "Technology should feel effortless and beautiful",
+                "positioning": "Against utilitarian tech brands, we are the elegant choice for discerning professionals",
+                "audience_archetype": "The Ruler - desires control, sophistication, and premium quality",
+                "value_ladder_focus": "Self-expressive (technology as identity statement)",
+                "personality_matrix": {
+                    "friendly_authoritative": 7,
+                    "classic_modern": 8,
+                    "minimal_expressive": 3,
+                    "rational_emotional": 6,
+                    "premium_accessible": 8,
+                    "playful_serious": 7
+                },
+                "story_kernel": "We help ambitious professionals express their refined taste through technology that's as beautiful as it is powerful"
+            },
+            "color_palette": {
+                "primary": "#1A1A2E",
+                "primary_name": "Deep Navy",
+                "secondary": [
+                    "#16213E",
+                    "#0F3460"
+                ],
+                "secondary_names": [
+                    "Midnight",
+                    "Royal Blue"
+                ],
+                "accent": "#E94560",
+                "accent_name": "Coral Red",
+                "neutral": "#F5F5F5",
+                "neutral_name": "Off-white",
+                "rationale": "Navy conveys trust and premium quality (luxury positioning), coral provides energetic contrast for CTAs, creating sophisticated yet approachable palette"
+            },
+            "typography": {
+                "primary": "Playfair Display",
+                "primary_classification": "Serif - Transitional",
+                "secondary": "Inter",
+                "secondary_classification": "Sans-serif - Neo-Grotesk",
+                "rationale": "Playfair adds luxury and elegance (serif = heritage/premium), Inter provides modern readability and tech credibility. Serif + Sans pairing = professional editorial feel."
+            },
+            "outcomes": "Successfully differentiated from utilitarian competitors, positioned as premium choice, strong brand recognition"
+        },
+        {
+            "id": "wellness_startup",
+            "brand": "Holistic Wellness Platform",
+            "industry": "Health & Wellness / Digital Health",
+            "challenge": "Stand out in saturated wellness market while conveying both scientific credibility and human warmth",
+            "strategy": {
+                "core_truth": "True wellness is personal, not prescriptive",
+                "positioning": "Against one-size-fits-all wellness programs, we are the personalized path for individuals seeking authentic transformation",
+                "audience_archetype": "The Caregiver (for self) - motivated by self-care and compassion",
+                "value_ladder_focus": "Emotional (feeling supported and understood)",
+                "personality_matrix": {
+                    "friendly_authoritative": 4,
+                    "classic_modern": 6,
+                    "minimal_expressive": 4,
+                    "rational_emotional": 4,
+                    "premium_accessible": 5,
+                    "playful_serious": 4
+                },
+                "story_kernel": "We help wellness seekers discover their unique path to balance through personalized guidance that honors their individual journey"
+            },
+            "color_palette": {
+                "primary": "#8FBC8F",
+                "primary_name": "Sage Green",
+                "secondary": [
+                    "#E8F5E9",
+                    "#B2DFDB"
+                ],
+                "secondary_names": [
+                    "Mint Cream",
+                    "Aqua Mist"
+                ],
+                "accent": "#FFB74D",
+                "accent_name": "Warm Amber",
+                "neutral": "#FAFAFA",
+                "neutral_name": "Soft White",
+                "rationale": "Sage green conveys natural wellness and calm (wellness psychology), mint tones add freshness, warm amber provides encouraging energy without aggression"
+            },
+            "typography": {
+                "primary": "Nunito",
+                "primary_classification": "Sans-serif - Rounded Humanist",
+                "secondary": "Open Sans",
+                "secondary_classification": "Sans-serif - Humanist",
+                "rationale": "Nunito's rounded forms convey warmth and approachability (human-centric positioning), Open Sans provides clarity for content-heavy wellness information. Both humanist = friendly, accessible."
+            },
+            "outcomes": "Differentiated through personalized approach, balanced scientific credibility with warmth, strong user trust"
+        },
+        {
+            "id": "creative_agency",
+            "brand": "Bold Creative Agency",
+            "industry": "Creative Services / Branding",
+            "challenge": "Demonstrate creative boldness while maintaining professional credibility for enterprise clients",
+            "strategy": {
+                "core_truth": "Great brands are built on brave decisions, not safe ones",
+                "positioning": "Against conservative agencies, we are the bold partner for brands ready to stand out",
+                "audience_archetype": "The Rebel - challenges status quo, seeks differentiation",
+                "value_ladder_focus": "Self-expressive (brand as statement of courage)",
+                "personality_matrix": {
+                    "friendly_authoritative": 6,
+                    "classic_modern": 9,
+                    "minimal_expressive": 8,
+                    "rational_emotional": 7,
+                    "premium_accessible": 7,
+                    "playful_serious": 6
+                },
+                "story_kernel": "We help ambitious brands break through the noise by embracing bold creative that drives real business results"
+            },
+            "color_palette": {
+                "primary": "#FF006E",
+                "primary_name": "Electric Magenta",
+                "secondary": [
+                    "#8338EC",
+                    "#3A86FF"
+                ],
+                "secondary_names": [
+                    "Vibrant Purple",
+                    "Bright Blue"
+                ],
+                "accent": "#FFBE0B",
+                "accent_name": "Bold Yellow",
+                "neutral": "#1A1A1A",
+                "neutral_name": "Rich Black",
+                "rationale": "Electric magenta is ownable and bold (signature color), purple and blue add depth while maintaining energy, yellow accent for urgency, black for sophistication"
+            },
+            "typography": {
+                "primary": "Druk Wide",
+                "primary_classification": "Sans-serif - Grotesque Display",
+                "secondary": "Inter",
+                "secondary_classification": "Sans-serif - Neo-Grotesk",
+                "rationale": "Druk Wide is bold and unapologetic (creative/fashion positioning), Inter provides professional readability. Display + Sans pairing = bold yet credible."
+            },
+            "outcomes": "Attracted bold-seeking clients, differentiated from conservative competitors, maintained enterprise credibility"
+        }
+    ],
+    "anti_patterns": [
+        {
+            "scenario": "Generic Tech Startup",
+            "mistake": "Blue gradient logo with sans-serif wordmark",
+            "why_it_fails": "Indistinguishable from thousands of SaaS companies, no differentiation",
+            "lesson": "Violates Differentiation Law - if it feels safe, it's already similar to competitors"
+        },
+        {
+            "scenario": "Wellness Brand with Clinical Colors",
+            "mistake": "Sterile white and medical blue palette",
+            "why_it_fails": "Conveys clinical/hospital feel instead of holistic wellness",
+            "lesson": "Color psychology mismatch - colors must align with brand personality and audience emotions"
+        },
+        {
+            "scenario": "Luxury Brand with Comic Sans",
+            "mistake": "Using playful, casual typography for premium positioning",
+            "why_it_fails": "Typography contradicts luxury brand personality",
+            "lesson": "Typography must align with brand personality matrix - luxury requires serif or refined sans"
+        }
+    ]
+}

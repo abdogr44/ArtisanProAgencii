@@ -1,0 +1,13 @@
+[
+  {
+    "timestamp": "2025-12-08T03:29:49.685670",
+    "action": "prompt_sent",
+    "target": "kie.ai",
+    "response_status": 200,
+    "data": {
+      "prompt": "Generate a bold social media graphic...",
+      "dimensions": "1080x1080",
+      "style": "bold"
+    }
+  }
+]

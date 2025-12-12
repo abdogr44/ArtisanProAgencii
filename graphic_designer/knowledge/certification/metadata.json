@@ -1,0 +1,85 @@
+{
+    "agent_name": "GraphicDesigner-A1",
+    "certification_level": "Expert",
+    "certification_title": "Brand Identity Design Professional — 2025",
+    "certification_date": "2025-12-08",
+    "version": "1.0.0-mvp",
+    "equivalent_experience": "10+ years senior brand strategist at top agencies",
+    "agency_equivalents": [
+        "Pentagram",
+        "Landor",
+        "Wolff Olins",
+        "Interbrand",
+        "Siegel+Gale"
+    ],
+    "competencies": {
+        "brand_strategy": {
+            "level": "Expert",
+            "capabilities": [
+                "7 Strategic Pillars application",
+                "Core Truth definition",
+                "Positioning framework development",
+                "Audience archetype mapping",
+                "Value ladder construction",
+                "Brand personality matrix scoring",
+                "Narrative framework creation"
+            ]
+        },
+        "color_psychology": {
+            "level": "Expert",
+            "capabilities": [
+                "Emotional color mapping",
+                "Strategic palette architecture",
+                "WCAG compliance validation",
+                "Signature color development",
+                "Competitive color differentiation",
+                "Color harmony systems"
+            ]
+        },
+        "typography_systems": {
+            "level": "Expert",
+            "capabilities": [
+                "3-tier hierarchy design",
+                "Strategic typeface selection",
+                "Professional pairing rules",
+                "Type scale system development",
+                "Readability optimization"
+            ]
+        },
+        "prompt_engineering": {
+            "level": "Expert",
+            "capabilities": [
+                "5-element prompt construction",
+                "Brand-aligned visual language",
+                "Platform-specific optimization",
+                "Constraint definition"
+            ]
+        }
+    },
+    "knowledge_domains": [
+        "Brand Strategy Foundations",
+        "Color Psychology & Systems",
+        "Typography Systems"
+    ],
+    "operating_modes": [
+        {
+            "mode": "production",
+            "description": "Fast execution for social media content generation",
+            "use_case": "Time-sensitive deliverables, content variants, rapid production"
+        },
+        {
+            "mode": "strategy",
+            "description": "Knowledge-enhanced strategic brand identity development",
+            "use_case": "Brand identity projects, strategic design, differentiation-focused work"
+        }
+    ],
+    "certification_standards": {
+        "minimum_quality_score": 80,
+        "evaluation_criteria": [
+            "prompt_quality",
+            "strategic_alignment"
+        ],
+        "required_strategic_questions": 3,
+        "design_justification": "required_in_strategy_mode"
+    }
+}

@@ -1,0 +1,584 @@
+{
+    "version": "1.0.0-mvp",
+    "certification_level": "expert",
+    "last_updated": "2025-12-08",
+    "domains": {
+        "brand_strategy": {
+            "title": "Brand Strategy Foundations",
+            "description": "Expert-level strategic frameworks for brand identity development",
+            "principles": {
+                "strategic_pillars": {
+                    "core_truth": {
+                        "definition": "The non-negotiable belief the brand stands for (not a slogan)",
+                        "application": "Define before any visual work begins",
+                        "example": "Patagonia: 'We're in business to save our home planet'",
+                        "rule": "Must be authentic, defensible, and differentiating"
+                    },
+                    "positioning": {
+                        "definition": "The space the brand occupies in the mind, not the market",
+                        "framework": "Against [competitor], we are [unique attribute] for [audience]",
+                        "rules": [
+                            "Must be defensible - can you own this space?",
+                            "Must be relevant - does the audience care?",
+                            "Must be distinct - is it different from competitors?"
+                        ],
+                        "example": "Against utilitarian tech brands, we are the elegant choice for discerning professionals"
+                    },
+                    "audience_archetypes": {
+                        "definition": "Psychological profiles, not demographics",
+                        "types": [
+                            "The Explorer - seeks adventure and discovery",
+                            "The Creator - values self-expression and innovation",
+                            "The Ruler - desires control and leadership",
+                            "The Caregiver - motivated by service and compassion",
+                            "The Sage - pursues knowledge and truth",
+                            "The Innocent - seeks simplicity and happiness",
+                            "The Hero - strives for mastery and courage",
+                            "The Rebel - challenges the status quo",
+                            "The Magician - transforms reality",
+                            "The Lover - creates intimacy and passion",
+                            "The Jester - brings joy and entertainment",
+                            "The Everyman - seeks belonging and connection"
+                        ],
+                        "application": "Map brand personality to audience archetype for alignment"
+                    },
+                    "value_ladder": {
+                        "levels": [
+                            {
+                                "tier": "Functional",
+                                "description": "What the product does",
+                                "example": "A car provides transportation"
+                            },
+                            {
+                                "tier": "Emotional",
+                                "description": "How it makes you feel",
+                                "example": "A car makes you feel free"
+                            },
+                            {
+                                "tier": "Social",
+                                "description": "How others perceive you",
+                                "example": "A car signals your status"
+                            },
+                            {
+                                "tier": "Self-expressive",
+                                "description": "Who you become",
+                                "example": "A car expresses your identity"
+                            }
+                        ],
+                        "rule": "Premium brands operate at emotional/self-expressive levels, not just functional"
+                    },
+                    "brand_personality_matrix": {
+                        "description": "6-axis sliding scale system for defining brand personality",
+                        "axes": [
+                            {
+                                "name": "Friendly ↔ Authoritative",
+                                "scale": "1-10",
+                                "1": "Warm, approachable, conversational",
+                                "10": "Expert, commanding, formal"
+                            },
+                            {
+                                "name": "Classic ↔ Modern",
+                                "scale": "1-10",
+                                "1": "Traditional, timeless, heritage",
+                                "10": "Cutting-edge, contemporary, innovative"
+                            },
+                            {
+                                "name": "Minimal ↔ Expressive",
+                                "scale": "1-10",
+                                "1": "Simple, restrained, understated",
+                                "10": "Bold, decorative, maximalist"
+                            },
+                            {
+                                "name": "Rational ↔ Emotional",
+                                "scale": "1-10",
+                                "1": "Data-driven, logical, analytical",
+                                "10": "Feeling-driven, passionate, empathetic"
+                            },
+                            {
+                                "name": "Premium ↔ Accessible",
+                                "scale": "1-10",
+                                "1": "Exclusive, luxury, aspirational",
+                                "10": "Inclusive, affordable, democratic"
+                            },
+                            {
+                                "name": "Playful ↔ Serious",
+                                "scale": "1-10",
+                                "1": "Fun, whimsical, lighthearted",
+                                "10": "Professional, sober, earnest"
+                            }
+                        ],
+                        "application": "Score brand on all 6 axes before visual development to ensure consistency"
+                    },
+                    "brand_narrative_framework": {
+                        "structure": [
+                            {
+                                "stage": "Conflict",
+                                "description": "The problem or tension in the market/world"
+                            },
+                            {
+                                "stage": "Insight",
+                                "description": "The unique understanding or perspective"
+                            },
+                            {
+                                "stage": "Resolution",
+                                "description": "How the brand solves the problem"
+                            },
+                            {
+                                "stage": "Transformation",
+                                "description": "The change the brand creates in customers' lives"
+                            }
+                        ],
+                        "rule": "Every brand identity should emerge from a narrative, not just aesthetics"
+                    },
+                    "differentiation_law": {
+                        "principle": "If the design feels 'safe,' it's already similar to someone else's",
+                        "application": "Always validate uniqueness vs. competitors before finalizing",
+                        "test": "Can this identity be confused with any competitor? If yes, redesign."
+                    }
+                },
+                "story_kernel": {
+                    "template": "We help [audience] become [aspiration] by [unique approach]",
+                    "examples": [
+                        "We help creators feel confident by giving them tools that amplify their voice",
+                        "We help busy professionals achieve balance by simplifying their daily routines",
+                        "We help entrepreneurs build legacy by providing strategic clarity"
+                    ],
+                    "application": "Create story kernel before visual identity development"
+                }
+            },
+            "strategic_questions": [
+                "What problem is this brand solving?",
+                "What emotion should the audience feel?",
+                "What differentiates this identity from competitors?",
+                "What archetype does the audience identify with?",
+                "What level of the value ladder does this brand operate on?"
+            ],
+            "behavioral_standards": [
+                "Always ask strategic questions before designing",
+                "Always justify design decisions with strategic reasoning",
+                "Always follow: Strategy → Concept → Execution",
+                "Never generate generic designs",
+                "Always validate differentiation vs. competitors"
+            ]
+        },
+        "color_theory": {
+            "title": "Color Psychology & Systems",
+            "description": "Expert-level color strategy and palette architecture",
+            "principles": {
+                "palette_architecture": {
+                    "structure": {
+                        "primary": {
+                            "count": 1,
+                            "role": "Identity anchor - the signature color",
+                            "application": "Used in logo, key brand moments, primary CTAs"
+                        },
+                        "secondary": {
+                            "count": "2-3",
+                            "role": "Flexibility and depth",
+                            "application": "Supporting elements, backgrounds, secondary content"
+                        },
+                        "accent": {
+                            "count": 1,
+                            "role": "Call-to-action energy",
+                            "application": "Buttons, highlights, urgent messaging"
+                        },
+                        "neutral": {
+                            "count": "1-2",
+                            "role": "Typography and backgrounds",
+                            "application": "Body text, backgrounds, borders, subtle elements"
+                        }
+                    },
+                    "rule": "Never pick colors for aesthetics alone; pick them for strategic meaning"
+                },
+                "emotional_color_mapping": {
+                    "trust": {
+                        "colors": [
+                            "Blue",
+                            "Navy",
+                            "Teal"
+                        ],
+                        "psychology": "Stability, reliability, professionalism",
+                        "industries": [
+                            "Finance",
+                            "Healthcare",
+                            "Technology",
+                            "Corporate"
+                        ]
+                    },
+                    "innovation": {
+                        "colors": [
+                            "Holographic gradients",
+                            "Electric Blue",
+                            "Neon Purple",
+                            "Cyan"
+                        ],
+                        "psychology": "Forward-thinking, cutting-edge, futuristic",
+                        "industries": [
+                            "Tech startups",
+                            "AI/ML",
+                            "Crypto",
+                            "Gaming"
+                        ]
+                    },
+                    "luxury": {
+                        "colors": [
+                            "Black",
+                            "Gold",
+                            "Deep Emerald",
+                            "Burgundy",
+                            "Champagne"
+                        ],
+                        "psychology": "Exclusivity, sophistication, premium quality",
+                        "industries": [
+                            "Fashion",
+                            "Jewelry",
+                            "Automotive",
+                            "Hospitality"
+                        ]
+                    },
+                    "wellness": {
+                        "colors": [
+                            "Sage",
+                            "Mint",
+                            "Lavender",
+                            "Soft Pink",
+                            "Cream"
+                        ],
+                        "psychology": "Calm, healing, natural, nurturing",
+                        "industries": [
+                            "Health",
+                            "Spa",
+                            "Yoga",
+                            "Organic products"
+                        ]
+                    },
+                    "urgency_action": {
+                        "colors": [
+                            "Red",
+                            "Orange",
+                            "Bright Yellow"
+                        ],
+                        "psychology": "Energy, excitement, immediate response",
+                        "industries": [
+                            "Food delivery",
+                            "Sales",
+                            "Entertainment",
+                            "Sports"
+                        ]
+                    },
+                    "creativity": {
+                        "colors": [
+                            "Purple",
+                            "Magenta",
+                            "Vibrant Pink",
+                            "Coral"
+                        ],
+                        "psychology": "Imagination, originality, artistic expression",
+                        "industries": [
+                            "Design",
+                            "Arts",
+                            "Creative agencies",
+                            "Education"
+                        ]
+                    },
+                    "nature_sustainability": {
+                        "colors": [
+                            "Green",
+                            "Forest",
+                            "Earth tones",
+                            "Terracotta"
+                        ],
+                        "psychology": "Growth, eco-friendly, organic, responsible",
+                        "industries": [
+                            "Sustainability",
+                            "Agriculture",
+                            "Outdoor",
+                            "Environmental"
+                        ]
+                    },
+                    "energy_youth": {
+                        "colors": [
+                            "Bright Yellow",
+                            "Orange",
+                            "Vibrant Pink",
+                            "Lime"
+                        ],
+                        "psychology": "Optimism, vitality, playfulness, enthusiasm",
+                        "industries": [
+                            "Youth brands",
+                            "Sports",
+                            "Entertainment",
+                            "Social media"
+                        ]
+                    }
+                },
+                "wcag_compliance": {
+                    "minimum_contrast": "4.5:1",
+                    "application": "Body text (under 18pt) on background",
+                    "large_text_minimum": "3:1",
+                    "large_text_definition": "18pt+ or 14pt+ bold",
+                    "rule": "Check all text-background pairs for accessibility",
+                    "tools": [
+                        "WebAIM Contrast Checker",
+                        "Colorable",
+                        "Contrast Ratio"
+                    ]
+                },
+                "signature_color_rule": {
+                    "principle": "One color must be uniquely ownable vs. competitors",
+                    "examples": [
+                        "Tiffany Blue (#0abab5) - Tiffany & Co.",
+                        "Coca-Cola Red (#f40009) - Coca-Cola",
+                        "UPS Brown (#351c15) - UPS",
+                        "Cadbury Purple (#5f259f) - Cadbury",
+                        "John Deere Green (#367c2b) - John Deere"
+                    ],
+                    "application": "Research competitor colors, find white space, claim it",
+                    "legal": "Consider trademark protection for signature colors"
+                },
+                "color_harmony_systems": {
+                    "monochromatic": {
+                        "description": "Variations of a single hue",
+                        "use_case": "Minimal, sophisticated brands",
+                        "example": "Navy + Light Blue + Powder Blue"
+                    },
+                    "analogous": {
+                        "description": "Colors adjacent on color wheel",
+                        "use_case": "Natural, harmonious palettes",
+                        "example": "Blue + Teal + Green"
+                    },
+                    "complementary": {
+                        "description": "Colors opposite on color wheel",
+                        "use_case": "High contrast, energetic brands",
+                        "example": "Blue + Orange"
+                    },
+                    "triadic": {
+                        "description": "Three colors evenly spaced on wheel",
+                        "use_case": "Vibrant, balanced palettes",
+                        "example": "Red + Yellow + Blue"
+                    },
+                    "split_complementary": {
+                        "description": "Base color + two adjacent to complement",
+                        "use_case": "Sophisticated contrast",
+                        "example": "Blue + Red-Orange + Yellow-Orange"
+                    }
+                }
+            },
+            "rules": [
+                "Each palette MUST include: 1 primary + 2-3 secondary + 1 accent + 1 neutral",
+                "Minimum WCAG 4.5:1 contrast ratio for body text on backgrounds",
+                "Every color must map to a brand personality attribute or strategic meaning",
+                "Signature color should be defensible and distinct from competitors",
+                "Test palette in grayscale to ensure sufficient contrast hierarchy",
+                "Consider cultural color meanings for global brands"
+            ]
+        },
+        "typography": {
+            "title": "Typography Systems",
+            "description": "Expert-level typography hierarchy and strategic selection",
+            "principles": {
+                "three_tier_hierarchy": {
+                    "primary_typeface": {
+                        "role": "Personality carrier",
+                        "usage": "Headlines, brand moments, key messaging, hero sections",
+                        "characteristics": "Distinctive, memorable, aligned with brand personality",
+                        "weight_range": "Minimum 2-3 weights (Regular, Bold, optional Black)"
+                    },
+                    "secondary_typeface": {
+                        "role": "Utility workhorse",
+                        "usage": "Body text, captions, supporting content, UI elements",
+                        "characteristics": "Highly readable, neutral, extensive character set",
+                        "weight_range": "Minimum 4 weights (Light, Regular, Medium, Bold)"
+                    },
+                    "display_typeface": {
+                        "role": "Emotional punch (optional)",
+                        "usage": "Special moments, hero sections, campaign headers",
+                        "characteristics": "Highly expressive, used sparingly for impact",
+                        "weight_range": "Often single weight, highly stylized"
+                    }
+                },
+                "strategic_typeface_selection": {
+                    "luxury": {
+                        "recommended": [
+                            "Serif",
+                            "Transitional",
+                            "Didone"
+                        ],
+                        "examples": [
+                            "Playfair Display",
+                            "Bodoni",
+                            "Didot",
+                            "Caslon",
+                            "Baskerville"
+                        ],
+                        "rationale": "Serifs convey heritage, sophistication, timelessness"
+                    },
+                    "tech": {
+                        "recommended": [
+                            "Grotesk",
+                            "Geometric Sans"
+                        ],
+                        "examples": [
+                            "Inter",
+                            "Helvetica Neue",
+                            "Futura",
+                            "Circular",
+                            "GT America"
+                        ],
+                        "rationale": "Clean sans-serifs convey modernity, precision, clarity"
+                    },
+                    "human_centric": {
+                        "recommended": [
+                            "Rounded Sans",
+                            "Humanist Sans"
+                        ],
+                        "examples": [
+                            "Nunito",
+                            "Quicksand",
+                            "Montserrat",
+                            "Open Sans",
+                            "Lato"
+                        ],
+                        "rationale": "Rounded forms convey warmth, approachability, friendliness"
+                    },
+                    "established_corporate": {
+                        "recommended": [
+                            "Neo-Grotesk"
+                        ],
+                        "examples": [
+                            "Helvetica",
+                            "Univers",
+                            "Akzidenz-Grotesk",
+                            "Arial"
+                        ],
+                        "rationale": "Neutral, professional, authoritative"
+                    },
+                    "creative_fashion": {
+                        "recommended": [
+                            "Brutalist",
+                            "High-contrast Serif",
+                            "Display"
+                        ],
+                        "examples": [
+                            "Druk",
+                            "GT Super",
+                            "Canela",
+                            "Freight Display"
+                        ],
+                        "rationale": "Bold, distinctive, fashion-forward"
+                    }
+                },
+                "pairing_rules": {
+                    "serif_sans": {
+                        "combination": "Serif (headlines) + Sans-serif (body)",
+                        "effect": "Professional, editorial, balanced",
+                        "example": "Playfair Display + Inter",
+                        "use_case": "Publishing, professional services, content-heavy sites"
+                    },
+                    "grotesk_geometric": {
+                        "combination": "Grotesk (primary) + Geometric Sans (secondary)",
+                        "effect": "Modern, corporate, clean",
+                        "example": "Helvetica + Futura",
+                        "use_case": "Tech companies, corporate brands"
+                    },
+                    "display_sans": {
+                        "combination": "Display (headlines) + Sans-serif (body)",
+                        "effect": "Bold, youthful, energetic",
+                        "example": "Druk + Inter",
+                        "use_case": "Startups, creative agencies, youth brands"
+                    },
+                    "constraint": "Never mix more than 2 font families in a system (3 if display is truly necessary)"
+                },
+                "type_scale_system": {
+                    "description": "Consistent sizing hierarchy using mathematical ratios",
+                    "ratios": {
+                        "minor_second": "1.067 - subtle, conservative",
+                        "major_second": "1.125 - balanced, versatile",
+                        "minor_third": "1.200 - noticeable, professional",
+                        "major_third": "1.250 - strong, editorial",
+                        "perfect_fourth": "1.333 - dramatic, impactful",
+                        "golden_ratio": "1.618 - harmonious, classical"
+                    },
+                    "application": "Choose ratio based on brand personality, apply consistently",
+                    "example": "Base 16px × 1.250 ratio = 16, 20, 25, 31, 39, 49, 61, 76, 95"
+                },
+                "readability_standards": {
+                    "body_text_size": "16-18px minimum for web",
+                    "line_height": "1.5-1.75 for body text",
+                    "line_length": "50-75 characters per line (optimal readability)",
+                    "paragraph_spacing": "1.5em minimum between paragraphs",
+                    "letter_spacing": "Slightly increase for all-caps text (+0.05-0.1em)"
+                }
+            },
+            "rules": [
+                "Maximum 2 font families per brand system (3 only if display typeface is essential)",
+                "Primary typeface must align with brand personality matrix",
+                "Clear hierarchy: Primary (personality) + Secondary (utility) + Optional Display (impact)",
+                "Pairing must create contrast, not conflict (different classifications work best)",
+                "Ensure extensive language support for global brands",
+                "Test readability at all sizes (especially mobile)",
+                "Maintain consistent type scale using mathematical ratios",
+                "Never use more than 3-4 font weights from a single family"
+            ]
+        }
+    },
+    "evaluation_criteria": {
+        "prompt_quality_score": {
+            "max_score": 100,
+            "components": {
+                "brand_tone": {
+                    "points": 20,
+                    "description": "Prompt includes brand personality/tone (e.g., 'luxury', 'playful', 'professional')"
+                },
+                "industry_context": {
+                    "points": 20,
+                    "description": "Prompt specifies industry/market context for competitive relevance"
+                },
+                "format_platform": {
+                    "points": 20,
+                    "description": "Prompt defines format and platform (Instagram, LinkedIn, print, etc.)"
+                },
+                "visual_language_keywords": {
+                    "points": 20,
+                    "description": "Prompt includes visual style keywords (minimal, geometric, high contrast, etc.)"
+                },
+                "constraints": {
+                    "points": 20,
+                    "description": "Prompt defines constraints (no text, specific colors, aspect ratio, etc.)"
+                }
+            },
+            "threshold": 80,
+            "evaluation": "Sum all components. Score ≥80 = Pass, <80 = Regenerate with improvements"
+        },
+        "strategic_alignment_score": {
+            "max_score": 100,
+            "components": {
+                "queries_knowledge_pack": {
+                    "points": 25,
+                    "description": "Agent queries BrandIdentityKnowledgeTool before generating (Strategy Mode)"
+                },
+                "justifies_decisions": {
+                    "points": 25,
+                    "description": "Agent provides strategic reasoning for design choices"
+                },
+                "applies_principles": {
+                    "points": 25,
+                    "description": "Agent applies relevant knowledge pack principles (color meaning, typography selection, etc.)"
+                },
+                "maintains_consistency": {
+                    "points": 25,
+                    "description": "Agent maintains consistency with brand personality across all outputs"
+                }
+            },
+            "threshold": 80,
+            "evaluation": "Sum all components. Score ≥80 = Pass, <80 = Review and improve process"
+        }
+    },
+    "metadata": {
+        "domains_included": 3,
+        "total_principles": 15,
+        "certification_level": "Expert",
+        "target_audience": "GraphicDesigner-A1 Agent",
+        "version_notes": "MVP release with 3 core domains: brand_strategy, color_theory, typography"
+    }
+}
