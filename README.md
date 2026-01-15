@@ -1,208 +1,110 @@
-# Artisan Pro Agency
+# Athar Publishing Pipeline (Artisan Pro)
 
-A production-grade agentic system for social media graphic creation using the Agency Swarm framework and Kie.ai APIs.
+A secure, production-grade agentic system for the end-to-end publishing of Athar books. This pipeline orchestrates manuscript ingestion, editing, proofreading, formatting, and multi-format release packaging.
 
 ## Overview
 
-GraphicDesigner-A1 accepts images, text prompts, DOCX/PDF documents and produces:
-- 3-8 image variants per request (sizes: 1080x1080, 1200x628, 1080x1920)
-- Descriptive captions and alt text
-- Optional PDF slide deck exports with mockups and usage notes
+The Athar Publishing Pipeline transforms raw manuscripts (DOCX/PDF) into production-ready artifacts (PDF, EPUB, Reader Bundles) through a rigorous, gated workflow. It emphasizes data integrity, security, and quality assurance.
 
-## Features
+## Key Features
 
-- **Automated File Processing**: Validates and extracts content from DOCX/PDF uploads
-- **Intelligent Prompt Generation**: Creates 3 style variants (conservative, bold, minimal)
-- **Kie.ai Integration**: Text-to-image and image-to-image generation with retry logic
-- **Quality Assurance**: Automated quality checks and content moderation
-- **Professional Outputs**: PDF slide decks and ZIP packages with metadata
-- **Audit Logging**: 30-day retention of all API interactions
+- **Automated Ingestion**: Parsing of DOCX/PDF files with hierarchy detection and confidence scoring.
+- **Gated Workflow**: Strict quality gates (Pass 1, Pass 2, Final) requiring crypto-bound sign-offs.
+- **Security**: 
+    - Full separation of private (master) and public (sample) artifacts.
+    - Input hash binding ensures approvals are invalidated if content changes.
+    - PII/sensitive data scanning for public bundles.
+- **Multi-Format Export**: Generates print-ready PDFs, EPUBs, and JSON bundles for the Athar Reader App.
+- **Firebase Integration**: Automated deployment of public reader bundles to Firebase Hosting.
 
-## Installation
+## Architecture
 
-### 1. Clone and Setup
+The system is built on the **Agency Swarm** framework, led by a central orchestrator:
 
-```bash
-cd agency-starter-template
-python -m venv venv
-```
+| Agent | Responsibilities | Key Tools |
+|-------|------------------|-----------|
+| **PublishingOrchestrator** | Pipeline management, gate enforcement, routing | `GateEnforcementTool`, `PipelineStatusTool` |
+| **ManuscriptIntake** | Ingestion, parsing, canonicalization | `ManuscriptCompilerTool` |
+| **StyleEditor** | Stylistic analysis and suggestions | `StyleSuggestionTool` |
+| **Proofreader** | Grammar/spelling (Pass 1) & formatting (Pass 2) | `ProofreadingTool` |
+| **Formatter** | PDF & EPUB generation | `BookFormatterTool` |
+| **ReaderPackBuilder** | Public sample bundle creation | `ReaderBundleGeneratorTool`, `ReaderBundleValidatorTool` |
+| **ReleasePackager** | Final release manifest & checksums | `ReleaseManifestTool` |
 
-### 2. Install Dependencies
-
-**Windows:**
-```powershell
-.\venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-**Mac/Linux:**
-```bash
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-### 3. Configure Environment
-
-Create a `.env` file or edit the existing one:
-
-```env
-OPENAI_API_KEY=your_openai_api_key_here
-KIE_API_KEY=your_kie_api_key_here
-```
+### Data Models (Schemas)
+All data structures use Pydantic V2 for strict validation:
+- `CanonicalManuscript`: Internal JSON representation of the book.
+- `GateState`: Tracks pipeline progress, issues, and sign-offs.
+- `ReaderBundle`: Public-facing schema for the Reader App.
+- `ReleaseManifest`: Immutable record of a release version.
 
 ## Usage
 
-### Run Terminal Demo
+### Prerequisites
+- Python 3.10+
+- OpenAI API Key (for agents)
+- Firebase Credentials (for hosting deployment)
+
+### Installation
+```bash
+pip install -r requirements.txt
+```
+
+### Running the Agency
+The entry point is `agency.py`, which initializes the `PublishingOrchestrator`.
 
 ```bash
 python agency.py
 ```
 
-### Example Request
+**Example Command:**
+> "Start the publishing process for 'my_manuscript.docx'. Title: 'The Journey', Author: 'Aya El Badry'."
 
-```
-User: Create Instagram graphics for a productivity app launch targeting busy entrepreneurs. 
-Include bold, eye-catching designs.
-```
-
-The agent will:
-1. Validate your request
-2. Generate a creative brief
-3. Create 3 style variant prompts
-4. Generate 9 images (3 variants × 3 sizes)
-5. Run quality and safety checks
-6. Create a PDF slide deck
-7. Package everything in a ZIP file
-8. Return structured JSON output
-
-## Architecture
-
-### Agent Structure
-
-- **GraphicDesigner**: Single agent with 14 specialized tools
-- **Model**: gpt-5.1 with medium reasoning
-- **No complex communication flows**: Optimized for efficiency
-
-### Tools (14 Total)
-
-**File Processing (4)**
-- `FileValidatorTool`: Validate uploads (200MB limit)
-- `DocxParserTool`: Extract DOCX content
-- `PdfParserTool`: Extract PDF content
-- `BriefGeneratorTool`: Synthesize creative briefs
-
-**Kie.ai Integration (4)**
-- `KieImageGenerateTool`: Text→image generation
-- `KieImageEditTool`: Image→image editing
-- `KieImageStatusTool`: Poll generation status
-- `PromptSynthesizerTool`: Create style variants
-
-**Output Generation (4)**
-- `ImagePostProcessorTool`: Convert formats, upscale
-- `PdfSlideGeneratorTool`: Create presentation decks
-- `ZipExportTool`: Package assets
-- `OutputFormatterTool`: Format JSON output
-
-**Quality & Safety (3)**
-- `ContentModerationTool`: Basic safety checks
-- `QualityCheckerTool`: Validate image quality
-- `AuditLoggerTool`: Log API interactions
-
-## Output Format
-
-```json
-{
-  "request_id": "uuid-v4",
-  "status": "done",
-  "brief": "Generated creative brief",
-  "images": [
-    {
-      "id": "img1",
-      "size": "1080x1080",
-      "variant": "bold",
-      "prompt": "...",
-      "url": "https://.../img1.png",
-      "meta": {"seed": 12345, "steps": 28}
-    }
-  ],
-  "caption": "Short caption (≤150 chars)",
-  "slides_pdf": "./files/deck.pdf",
-  "zipped_assets": "./files/assets.zip",
-  "metadata": {
-    "brand": "",
-    "style": "",
-    "iterations": 1
-  }
-}
-```
-
-## Safety & Limits
-
-- **File Size**: 200MB total upload limit
-- **Rate Limiting**: 4 concurrent Kie.ai requests, 60s timeout
-- **Audit Logs**: 30-day retention in `./graphic_designer/files/audit_logs/`
-- **Content Safety**: Basic heuristic moderation (integrate dedicated APIs for production)
-- **No Destructive Operations**: System files and secrets protected
+### Workflow Steps
+1.  **Ingestion**: `ManuscriptIntake` parses the file into `storage/private/manuscripts/`.
+2.  **Style Edit**: `StyleEditor` provides suggestions (non-blocking).
+3.  **Pass 1**: `Proofreader` checks grammar. **Gate: PASS1** must be signed.
+4.  **Formatting**: `Formatter` generates PDF/EPUBs.
+5.  **Pass 2**: `Proofreader` checks checks formatting. **Gate: PASS2** must be signed.
+6.  **Bundling**: `ReaderPackBuilder` creates the public sample JSON.
+7.  **Release**: `ReleasePackager` finalizes the manifest and deploys to Firebase.
 
 ## Testing
 
-Individual tool tests:
+A comprehensive production suite verifies the critical hardening measures.
 
 ```bash
-python graphic_designer/tools/FileValidatorTool.py
-python graphic_designer/tools/BriefGeneratorTool.py
-python graphic_designer/tools/PromptSynthesizerTool.py
+python test_production_suite.py
 ```
 
-## Project Structure
+**What it tests:**
+- **Gate Regression**: Ensures modifying content invalidates previous sign-offs.
+- **Bundle Safety**: Checks that public bundles don't leak non-whitelisted chapters.
+- **Parsing Trust**: Verifies confidence levels for different file types.
+- **Idempotency**: Ensures tools are safe to re-run.
 
-```
-agency-starter-template/
-├── graphic_designer/
-│   ├── __init__.py
-│   ├── graphic_designer.py
-│   ├── instructions.md
-│   ├── files/                    # Generated outputs
-│   └── tools/                    # 14 production tools
-│       ├── FileValidatorTool.py
-│       ├── DocxParserTool.py
-│       ├── KieImageGenerateTool.py
-│       └── ... (11 more)
-├── agency.py                     # Main entry point
-├── shared_instructions.md
-├── requirements.txt
-└── .env                          # API keys (gitignored)
+For end-to-end integration testing:
+```bash
+python test_publishing_pipeline.py
 ```
 
-## Customization
-
-### Adjust Rate Limits
-
-Edit tool files to modify concurrency and timeouts.
-
-### Add Custom Styles
-
-Modify `PromptSynthesizerTool.py` to add style variants.
-
-### Change Output Sizes
-
-Update size specifications in agent instructions.
-
-## Troubleshooting
-
-**"KIE_API_KEY not found"**
-- Ensure `.env` file exists with valid `KIE_API_KEY`
-
-**Virtual environment activation error**
-- Windows: Run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
-
-**Tool import errors**
-- Run `pip install -r requirements.txt` again
+## Directory Structure
+```
+ArtisanProAgencii/
+├── agency.py                 # Entry point
+├── schemas/                  # Pydantic V2 models
+├── publishing_orchestrator/  # Main agent
+├── manuscript_intake/        # Ingestion agent
+├── style_editor/             # Style agent
+├── proofreader/              # QC agent
+├── formatter/                # Export agent
+├── reader_packbuilder/       # Sample agent
+├── release_packager/         # Release agent
+├── storage/                  # Artifact storage
+│   ├── private/              # Master manuscripts & full exports
+│   └── public/               # Reader bundles (hosted)
+└── ...
+```
 
 ## License
-
-See project license file.
-
-## Support
-
-For issues or questions, refer to the Agency Swarm documentation: https://agency-swarm.ai/
+Proprietary - Athar Project

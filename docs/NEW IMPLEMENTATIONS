@@ -1,0 +1,115 @@
+Here is a detailed review of your current agency repository and how it aligns with the new publishing‑pipeline requirements. I’ve broken the review into the existing architecture, the gaps to be addressed, and a high‑level plan for adapting the system to the Athar publishing factory.
+
+1. Existing Repository Architecture
+
+Entry Point: The FastAPI server (main.py) spins up an agency that uses create_agency defined in agency.py. The current entry agent is SocialMediaWriter.
+
+Agents:
+
+SocialMediaWriter – entry agent; generates content/branding posts and uses three tools (BookKnowledgeTool, BrandIdentityKnowledgeTool, ContentGenerationTool).
+
+GraphicDesigner – a production agent for images/PDFs, using a dozen image/PDF tools.
+
+Reviewer – QA specialist.
+
+Tool structure: Tools are organized under each agent’s tools folder. Agency‑Swarm tools are Python classes that inherit from BaseTool and are defined using Pydantic for input validation; each tool must implement a run method. This pattern is a good basis for adding new tools.
+
+The system is currently geared towards social‑media content creation rather than a publishing pipeline. There is no concept of canonical manuscripts, multi‑stage editing, or gating before release. There is also no separation of public vs. private artifacts or final sign‑off by the writer.
+
+2. Gaps with Respect to the New Publishing Pipeline
+
+Entry agent mismatch. You need a PublishingOrchestrator entry agent to manage the pipeline (ingest → style edit → proof pass 1 → format → proof pass 2 → reader bundle → release). Using SocialMediaWriter as entry does not fit.
+
+Missing phases and tools. You must implement agents and tools for:
+
+Intake of DOCX/PDF to canonical manuscript.
+
+Style/Copy editing suggestions.
+
+Proofreading (two passes).
+
+Formatting to PDF/EPUB and sample.
+
+Reader bundle generation for the Firebase ReaderView.
+
+Release packaging with a manifest.
+
+Absence of gating & sign‑off. No mechanism enforces that Pass 1 must be signed before formatting or that Pass 2 must be signed before release.
+
+Output consistency. Current tools output heterogeneous data; you need a unified envelope (athar_output_envelope_v1.json) to standardize artifacts, reports, and next actions.
+
+Security & distribution. There is no separation between public and private artifacts. To prevent theft, you must ensure full books are never exposed publicly and that only sample bundles go to Firebase Hosting.
+
+No final export for Athar ReaderView. The existing code does not produce the reader_bundle.sample.json required by your Firebase reading surface.
+
+3. High‑Level Plan to Adapt the System
+3.1 Re‑architect Agents
+
+New entry agent: Create a publishing_orchestrator package that becomes the entry agent. It will orchestrate all stages and enforce gates/signatures.
+
+New agent packages:
+
+manuscript_intake: reads DOCX/PDF (use existing DocxParserTool and PdfParserTool) and emits canonical_manuscript.json.
+
+style_editor: suggests stylistic improvements (returns style_suggestions.json).
+
+proofreader: performs Pass 1 and Pass 2 checks, outputting diffs and reports.
+
+formatter: generates book_full.pdf, book_full.epub, sample.pdf, sample.epub.
+
+reader_packbuilder: builds reader_bundle.sample.json using whitelisted chapters.
+
+release_packager: assembles release_manifest.json with checksums and artifact paths.
+
+Retain graphic_designer only if you need cover creation.
+
+These agents should follow Agency‑Swarm’s tool pattern: inherit from BaseTool and implement run(). Use Pydantic fields to validate inputs and avoid hallucinations.
+
+3.2 Standardize Outputs
+
+Define a unified output envelope containing job metadata, artifacts, reports, next actions, and errors. Each tool returns this envelope rather than ad‑hoc data.
+
+The artifacts list should flag each item as private or public. Only reader_bundle.sample.json may be public.
+
+3.3 Implement Gates & Signatures
+
+Add FastAPI endpoints to register sign‑offs: e.g., POST /projects/{id}/sign with gate: PASS1|PASS2|FINAL.
+
+The orchestrator must prevent formatting if PASS1 isn’t signed and must prevent release if PASS2 isn’t signed.
+
+Include severity thresholds: you cannot proceed to the next stage if there are unresolved critical issues.
+
+3.4 Data Storage & Security
+
+Separate storage roots: private/ for canonical manuscripts and full exports; public/ for sample reader bundles.
+
+Use checksums and version numbers in release_manifest.json to track exact content of each release.
+
+Never deploy full canonical JSON to Firebase Hosting; only the sample reader bundle should go public.
+
+3.5 Reader Bundle Generation
+
+Define the reader_bundle.sample.json schema as discussed earlier (book metadata, toc, content blocks, allowed sample IDs, and integrity section).
+
+The reader_packbuilder agent builds this file from the canonical manuscript and sample whitelist.
+
+4. Implementation Milestones for Anti‑Gravity
+Stage	Tasks (concise)
+Infrastructure	Create publishing_orchestrator agent; modify agency.py to use it.
+Ingestion	Implement manuscript_intake agent using DocxParserTool/PdfParserTool; return canonical JSON.
+Editing	Add style_editor and proofreader agents; build diff structures and severity reports.
+Gating	Add sign‑off endpoints and enforce PASS1/PASS2 gates.
+Formatting	Use existing PDF/slide tools or create a new formatter tool to produce PDF/EPUB and sample exports.
+Reader Bundle	Build reader_packbuilder to output reader_bundle.sample.json and enforce chapter whitelist.
+Release Packaging	Implement release_packager that creates release_manifest.json and final artifact set.
+Security	Enforce public vs. private storage; block any attempt to expose full books.
+Testing & Docs	Provide Pydantic/Zod schemas for canonical manuscripts, diffs, reader bundles, and manifests; update README and build gates.
+Final Notes
+
+You can still let authors write in plain text or DOCX; the compiler will produce the canonical JSON. Writing in JSON is not required; security hinges on your distribution policies, not the authoring format.
+
+Keep the UI simple: a separate review console for sign‑off is preferable; don’t overload the reader application with admin functionality.
+
+Use versioning and checksums to avoid “which file is final?” confusion.
+
+By restructuring the agents, enforcing gating and signatures, and standardizing outputs, the repository will evolve from a social‑media content factory into a secure, production‑grade publishing pipeline for Athar.

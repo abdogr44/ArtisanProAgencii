@@ -1,0 +1,31 @@
+{
+  "project_id": "test-project",
+  "current_stage": "pass1_signed",
+  "issues": [],
+  "sign_offs": [
+    {
+      "gate": "PASS1",
+      "signed_by": "tester",
+      "signed_at": "2026-01-15T21:18:21.013411",
+      "notes": null,
+      "input_hash": "ea85ba462c121d5116a914aabd3c742ab16f4ca1a9ec40c505b3bba9eaf640b0",
+      "override_issues": false,
+      "overridden_issues": []
+    }
+  ],
+  "stage_history": [
+    {
+      "from": "proofed_1",
+      "to": "pass1_signed",
+      "timestamp": "2026-01-15T21:18:19.966842",
+      "reason": "Gate PASS1 signed by tester"
+    },
+    {
+      "from": "pass1_signed",
+      "to": "pass1_signed",
+      "timestamp": "2026-01-15T21:18:21.013429",
+      "reason": "Gate PASS1 signed by tester"
+    }
+  ],
+  "updated_at": "2026-01-15T21:18:21.013435"
+}
