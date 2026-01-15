@@ -13,5 +13,6 @@ proofreader = Agent(
     Generates detailed issue reports with severity levels to support gate sign-offs.""",
     instructions="./instructions.md",
     tools_folder="./tools",
-    model="gpt-4o-mini",
+    model="gpt-5.2",
+    reasoning_effort="low",
 )

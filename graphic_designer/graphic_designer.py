@@ -10,7 +10,7 @@ graphic_designer = Agent(
     name="GraphicDesigner",
     description="Artisan Pro production agent for social media content creation using Kie.ai APIs",
     instructions=instructions_content,
-    model="gpt-5.1",
-    reasoning="low",
+    model="gpt-5.2",
+    reasoning_effort="low",
     tools_folder="./tools",
 )

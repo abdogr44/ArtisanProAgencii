@@ -13,5 +13,6 @@ formatter = Agent(
     Handles Arabic typography and ensures consistent formatting across outputs.""",
     instructions="./instructions.md",
     tools_folder="./tools",
-    model="gpt-4o-mini",
+    model="gpt-5.2",
+    reasoning_effort="low",
 )

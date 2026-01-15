@@ -13,5 +13,6 @@ manuscript_intake = Agent(
     DOCX and PDF files into structured JSON format for the publishing pipeline.""",
     instructions="./instructions.md",
     tools_folder="./tools",
-    model="gpt-4o-mini",
+    model="gpt-5.2",
+    reasoning_effort="low",
 )

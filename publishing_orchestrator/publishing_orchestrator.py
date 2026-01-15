@@ -15,5 +15,6 @@ publishing_orchestrator = Agent(
     tasks to specialist agents and ensures security policies are followed.""",
     instructions="./instructions.md",
     tools_folder="./tools",
-    model="gpt-4o",
+    model="gpt-5.2",
+    reasoning_effort="low",
 )
