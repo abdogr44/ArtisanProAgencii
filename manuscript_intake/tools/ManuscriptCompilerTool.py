@@ -13,6 +13,14 @@ import re
 import hashlib
 import uuid
 from datetime import datetime, timezone
+from typing import Optional
+try:
+    from ...storage_backends import get_storage_backend
+except ImportError:
+    # Fallback
+    import sys
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+    from storage_backends import get_storage_backend
 
 
 class ManuscriptCompilerTool(BaseTool):
@@ -20,8 +28,8 @@ class ManuscriptCompilerTool(BaseTool):
     Compiles parsed document content into canonical manuscript JSON.
     Creates structured representation with chapters, sections, and content blocks.
     """
-    source_file: str = Field(
-        ..., description="Path to the source DOCX or PDF file"
+    source_file: Optional[str] = Field(
+        default=None, description="Path to the source DOCX or PDF file (Legacy/Local)"
     )
     title: str = Field(
         ..., description="Book title"
@@ -44,6 +52,9 @@ class ManuscriptCompilerTool(BaseTool):
     storage_root: str = Field(
         default="./storage", description="Root storage directory"
     )
+    source_storage_uri: Optional[str] = Field(
+        default=None, description="URI from StorageBackend"
+    )
     
     def run(self) -> str:
         """
@@ -51,14 +62,72 @@ class ManuscriptCompilerTool(BaseTool):
         Returns JSON with manuscript details and storage path.
         """
         # Validate source file
-        if not os.path.exists(self.source_file):
-            return json.dumps({
+        # Validate source file (Logic updated to support URI)
+        if not self.source_file and not self.source_storage_uri:
+             return json.dumps({
+                "success": False,
+                "error": "Either source_file or source_storage_uri must be provided."
+            }, indent=2)
+
+        if self.source_file and not os.path.exists(self.source_file) and not self.source_storage_uri:
+             # Only fail on missing local file if URI is NOT provided
+             return json.dumps({
                 "success": False,
                 "error": f"Source file not found: {self.source_file}"
             }, indent=2)
         
+        # Resolve source file
+        backend = get_storage_backend()
+        local_process_path = None
+        
+        if self.source_storage_uri:
+            # Download from backend
+            try:
+                 # Extract relative path if needed, but get_to_local takes connection-specific URI usually
+                 # For our system, it might expect relative path if URI schemes differ.
+                 # Let's standardize: base.py abstraction expects relative path for get/put?
+                 # Actually base.py definitions: put_file(local, storage_path), get_to_local(storage_path, local).
+                 # storage_uri from ingest tool is full URI (file:// or gs://).
+                 # We need to strip scheme to get storage_path.
+                 
+                 uri = self.source_storage_uri
+                 if uri.startswith("file://"):
+                     # It's absolute local path from LocalFSBackend
+                     path = uri.replace("file://", "")
+                     # On windows, /C:/... might happen.
+                     if os.name == 'nt' and path.startswith("/") and ":" in path:
+                         path = path.lstrip("/")
+                     local_process_path = path
+                 elif uri.startswith("gs://"):
+                     # gs://bucket/path/to/file
+                     parts = uri.replace("gs://", "").split("/", 1)
+                     if len(parts) > 1:
+                         path = parts[1] # Path within bucket
+                         temp_dest = os.path.join(self.storage_root, "temp", f"dl_{uuid.uuid4().hex}_{os.path.basename(path)}")
+                         local_process_path = backend.get_to_local(path, temp_dest)
+                     else:
+                        raise ValueError(f"Invalid GCS URI: {uri}")
+                 else:
+                     # Assume it's a direct path if no scheme?
+                     local_process_path = uri
+                     
+            except Exception as e:
+                return json.dumps({
+                    "success": False,
+                    "error": f"Failed to retrieve source from storage: {str(e)}"
+                }, indent=2)
+        elif self.source_file:
+            # Legacy/Direct local path
+            local_process_path = self.source_file
+            
+        if not local_process_path or not os.path.exists(local_process_path):
+             return json.dumps({
+                "success": False,
+                "error": f"Source file not accessible: {local_process_path}"
+            }, indent=2)
+            
         # Determine format
-        ext = os.path.splitext(self.source_file)[1].lower()
+        ext = os.path.splitext(local_process_path)[1].lower()
         if ext not in [".docx", ".pdf"]:
             return json.dumps({
                 "success": False,
@@ -71,9 +140,11 @@ class ManuscriptCompilerTool(BaseTool):
         # Parse document
         try:
             if ext == ".docx":
-                parsed = self._parse_docx()
+                # Need to update _parse_docx signature or use temporary overrides
+                # _parse_docx uses self.source_file. Update it to use specific path.
+                parsed = self._parse_docx(local_process_path)
             else:
-                parsed = self._parse_pdf()
+                parsed = self._parse_pdf(local_process_path)
         except Exception as e:
             return json.dumps({
                 "success": False,
@@ -188,11 +259,11 @@ class ManuscriptCompilerTool(BaseTool):
             "next_action": "Run style_editor for style suggestions"
         }, indent=2)
     
-    def _parse_docx(self) -> dict:
-        """Parse DOCX file and return content."""
+    def _parse_docx(self, path: str) -> dict:
+        """Parse DOCX using python-docx."""
         from docx import Document
         
-        doc = Document(self.source_file)
+        doc = Document(path)
         result = {
             "headings": [],
             "paragraphs": [],
@@ -222,11 +293,11 @@ class ManuscriptCompilerTool(BaseTool):
         result["full_text"] = "\n\n".join(all_text)
         return result
     
-    def _parse_pdf(self) -> dict:
-        """Parse PDF file and return content."""
+    def _parse_pdf(self, path: str) -> dict:
+        """Parse PDF using PyMuPDF."""
         import fitz  # PyMuPDF
         
-        pdf = fitz.open(self.source_file)
+        pdf = fitz.open(path)
         result = {
             "headings": [],
             "paragraphs": [],
