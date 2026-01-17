@@ -15,6 +15,9 @@ The Athar Publishing Pipeline transforms raw manuscripts (DOCX/PDF) into product
     - Input hash binding ensures approvals are invalidated if content changes.
     - PII/sensitive data scanning for public bundles.
 - **Multi-Format Export**: Generates print-ready PDFs, EPUBs, and JSON bundles for the Athar Reader App.
+- **Storage Abstraction**: 
+    - `storage_backends` supports Local FS (Development) and Google Cloud Storage (Production).
+    - Downloads files securely to private storage before pipeline processing.
 - **Firebase Integration**: Automated deployment of public reader bundles to Firebase Hosting.
 
 ## Architecture
@@ -23,7 +26,7 @@ The system is built on the **Agency Swarm** framework, led by a central orchestr
 
 | Agent | Responsibilities | Key Tools |
 |-------|------------------|-----------|
-| **PublishingOrchestrator** | Pipeline management, gate enforcement, routing | `GateEnforcementTool`, `PipelineStatusTool` |
+| **PublishingOrchestrator** | Pipeline management, gate enforcement, routing | `GateEnforcementTool`, `PipelineStatusTool`, `ProjectFileIngestTool` |
 | **ManuscriptIntake** | Ingestion, parsing, canonicalization | `ManuscriptCompilerTool` |
 | **StyleEditor** | Stylistic analysis and suggestions | `StyleSuggestionTool` |
 | **Proofreader** | Grammar/spelling (Pass 1) & formatting (Pass 2) | `ProofreadingTool` |
@@ -44,6 +47,14 @@ All data structures use Pydantic V2 for strict validation:
 - Python 3.10+
 - OpenAI API Key (for agents)
 - Firebase Credentials (for hosting deployment)
+
+### Configuration
+Environment variables in `.env`:
+```bash
+ATHAR_STORAGE_BACKEND=local    # or 'gcs'
+ATHAR_GCS_BUCKET=my-bucket     # required if backend is 'gcs'
+ATHAR_PROJECT_ROOT=./storage   # root for local storage
+```
 
 ### Installation
 ```bash

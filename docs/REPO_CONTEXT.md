@@ -7,7 +7,11 @@ graph TD
     User([User]) -->|Starts| Agency[agency.py]
     Agency -->|Initializes| Orch[PublishingOrchestrator]
     
+    Orch -->|Ingests| IngestTool[ProjectFileIngestTool]
+    IngestTool -->|Saves to| Storage[StorageBackend (Local/GCS)]
+    
     Orch -->|Routes to| Intake[ManuscriptIntake]
+    Intake -->|Reads from| Storage
     Intake -->|Uses| Compiler[ManuscriptCompilerTool]
     Compiler -->|Writes| MS_JSON[Canonical Manuscript JSON]
     
@@ -46,7 +50,9 @@ ArtisanProAgencii/
 ├── AGENTS.md                      # Brand rules & agent definitions
 ├── requirements.txt               # Python dependencies
 ├── test_publishing_pipeline.py    # E2E Integration Test
+
 ├── test_production_suite.py       # Production Hardening Test
+├── test_ingest_reliability.py     # Ingestion Logic Test
 │
 ├── schemas/                       # Pydantic V2 Data Models
 │   ├── athar_output_envelope.py
@@ -55,12 +61,20 @@ ArtisanProAgencii/
 │   ├── reader_bundle.py
 │   └── release_manifest.py
 │
+
+├── storage_backends/              # storage abstraction
+│   ├── base.py
+│   ├── local.py
+│   ├── gcs.py
+│   └── __init__.py
+│
 ├── publishing_orchestrator/       # Pipeline Controller
 │   ├── publishing_orchestrator.py
 │   ├── instructions.md
 │   └── tools/
 │       ├── GateEnforcementTool.py
-│       └── PipelineStatusTool.py
+│       ├── PipelineStatusTool.py
+│       └── ProjectFileIngestTool.py
 │
 ├── manuscript_intake/             # Ingestion Agent
 │   ├── manuscript_intake.py
